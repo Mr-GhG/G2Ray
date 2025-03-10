@@ -1,6 +1,6 @@
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
+    id("com.android.library") version("8.7.3")
+    id("org.jetbrains.kotlin.android") version("2.1.10")
     id("maven-publish")
 }
 
@@ -46,7 +46,7 @@ android {
             create<MavenPublication>("release") {
                 groupId = "io.jitpack"
                 artifactId = "library"
-                version = "1.0"
+                version = "0.1"
 
                 afterEvaluate {
                     from(components["release"])
@@ -57,13 +57,7 @@ android {
 }
 
 dependencies {
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    implementation("androidx.appcompat:appcompat:1.7.0")
 
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.so"))))
     implementation(files("libs/libv2ray.aar"))

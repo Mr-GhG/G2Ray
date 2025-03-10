@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    id("maven-publish")
 }
 
 android {
@@ -38,6 +39,19 @@ android {
     packaging {
         jniLibs {
             useLegacyPackaging = true
+        }
+    }
+    configure<PublishingExtension> {
+        publications {
+            create<MavenPublication>("release") {
+                groupId = "io.jitpack"
+                artifactId = "library"
+                version = "1.0"
+
+                afterEvaluate {
+                    from(components["release"])
+                }
+            }
         }
     }
 }
